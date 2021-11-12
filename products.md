@@ -5,18 +5,27 @@ Liefert alle Produkte mit den Basisinformationen zurück.
 ```
 SELECT 
 
-p.id,
-p.product_number,
+configurable.id,
+configurable.product_number,
 CASE
-	WHEN p.child_count > 0 THEN 'configurable'
+	WHEN configurable.child_count > 0 THEN 'configurable'
 	ELSE 'simple'
 END as type,
-p.active,
-p.stock,
-p.available,
-JSON_EXTRACT(p.price -> '$.*.gross[0]', '$[0]') as net,
-p.child_count
+configurable.active,
+configurable.stock,
+configurable.available,
+JSON_EXTRACT(configurable.price -> '$.*.gross[0]', '$[0]') as price,
+configurable.child_count,
 
-FROM product p
-WHERE product_number in ("132101 00-0060-B", "132101 00-0060", "132101 00-0002")
+children.product_number,
+children.stock,
+children.available,
+JSON_EXTRACT(children.price -> '$.*.gross[0]', '$[0]') as price
+
+
+FROM product configurable
+
+LEFT JOIN product as children on configurable.id=children.parent_id
+
+WHERE configurable.product_number in ("132101 00-0060-B", "132101 00-0060", "132101 00-0002");
 ```
