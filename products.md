@@ -1,6 +1,6 @@
 ### Produkte mit Basis-Informationen
 
-Liefert alle Produkte mit den Basisinformationen zurück. 
+Liefert alle Produkte mit den Basisinformationen aus Sicht eines konfigurierbaren Produkts zurück. Als Argument muss in der `where in condition` jeweils eine Liste an konfigurierbaren Produkten übergeben werden. 
 
 ```
 SELECT 
