@@ -34,3 +34,5 @@ LEFT JOIN product_visibility as shop_visibility on configurable.id=shop_visibili
 
 WHERE configurable.product_number in ("132101 00-0060-B", "132101 00-0060", "132101 00-0002");
 ```
+
+Test
